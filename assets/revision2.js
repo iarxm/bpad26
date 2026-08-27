@@ -5,6 +5,14 @@ function softLeadLabel(value){
   return v.replace(/\blead\b/ig,'team').replace(/\s{2,}/g,' ').trim();
 }
 
+function softOperationalText(value){
+  return String(value??'')
+    .replace(/Barry Sweeney\s*(?:—|-)?\s*Lead on Land/ig,'Barry')
+    .replace(/Barry Sweeney/ig,'Barry')
+    .replace(/Carlston\s*(?:—|-|\/)\s*Safety\s*&\s*Skipper Lead/ig,'Carlston')
+    .replace(/Lead on Land/ig,'land contact');
+}
+
 function setupNav(){
   const groups=[
     {label:'1 CONTROLS',items:[['control','Control'],['route','Route'],['timeline','Run of Day']]},
@@ -36,7 +44,7 @@ function control(){
     <div class="card kpi span-3"><div class="label">Launch scenarios</div><div class="value small-value">06:30 · 07:45 · 09:00</div><div class="note">7–10 h paddle envelope</div></div>
 
     <div class="card span-7 start-card"><div class="section-title">BEFORE WATER — START ACTIONS</div>
-      ${data.startActions.map((x,i)=>`<div class="action-row"><div class="action-index">${i+1}</div><div><strong>${esc(x.action)}</strong><div class="note">With: ${esc(softLeadLabel(x.owner))}</div></div><span class="badge">${esc(x.status)}</span></div>`).join('')}
+      ${data.startActions.map((x,i)=>`<div class="action-row"><div class="action-index">${i+1}</div><div><strong>${esc(softOperationalText(x.action))}</strong><div class="note">With: ${esc(softLeadLabel(x.owner))}</div></div><span class="badge">${esc(x.status)}</span></div>`).join('')}
     </div>
 
     <div class="card span-5"><div class="section-title">Live operations links</div>
@@ -47,7 +55,7 @@ function control(){
     </div>
 
     <div class="card span-7"><div class="section-title">GO / NO-GO gates</div>
-      ${data.goNoGo.map(x=>`<div class="checkrow"><div class="checkstatus ${x.status.toLowerCase()}">${esc(x.status)} ${x.hard?'<span class="hard">HARD</span>':''}</div><div><strong>${esc(x.item)}</strong><div class="note">${esc(x.rule)}</div></div></div>`).join('')}
+      ${data.goNoGo.map(x=>`<div class="checkrow"><div class="checkstatus ${x.status.toLowerCase()}">${esc(x.status)} ${x.hard?'<span class="hard">HARD</span>':''}</div><div><strong>${esc(x.item)}</strong><div class="note">${esc(softOperationalText(x.rule))}</div></div></div>`).join('')}
     </div>
 
     <div class="card span-5 critical"><div class="section-title">Working coordination</div>
@@ -58,18 +66,46 @@ function control(){
   </div>`;
 }
 
+function addClock(base,minutes){
+  const [h,m]=base.split(':').map(Number);
+  let total=(h*60+m+minutes)%(24*60);
+  if(total<0) total+=24*60;
+  return `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`;
+}
+function clockWindow(base,from,to){
+  if(from===to) return addClock(base,from);
+  return `${addClock(base,from)}–${addClock(base,to)}`;
+}
 function timeline(){
+  const launches=data.launchScenarios.map(x=>x.launch);
+  const rows=[
+    ['Final GO / HOLD / NO-GO','Forecast, tide/stream, route and launch-window check.',-90,-60],
+    ['Muster + kit / comms','Sign-on, AED, VHF, phones, battery packs, tracking and shore contact.',-60,-30],
+    ['Formal whole-team brief','Route, pods, signals, exits, reporting gates and emergency card.',-20,-5],
+    ['Launch','Actual water start.',0,0],
+    ['RP01 — northern report','Approx. 15 km. Progress update to Barry between the Teelin/Slieve sector and St John’s.',180,240],
+    ['Bullockmore / St John’s control','Approx. 21 km. Compact check before the open-water commitment.',255,330],
+    ['~25 km ETA reset','Recalculate remaining ETA from actual VMG, wind, group state and remaining distance.',285,375],
+    ['RP02 — open-bay report','Approx. 29 km. Mid-bay progress update to Barry.',330,435],
+    ['Receiving coast','Confirm Boat Quay or an alternate extraction based on the actual approach.',390,555],
+    ['Finish','Full 7–10 h event envelope.',420,600]
+  ];
   document.querySelector('#timeline').innerHTML=`<div class="grid">
-    <div class="card span-12"><div class="section-title">Launch / finish scenarios — Sunday</div>
-      <div class="scenario-grid">${data.launchScenarios.map(s=>`<div class="scenario"><div class="label">Launch</div><div class="scenario-time">${esc(s.launch)}</div><div><strong>${esc(s.duration)}</strong> paddle</div><div class="finish-window">${esc(s.finish)}</div><div class="note">${esc(s.use)}</div></div>`).join('')}</div>
+    <div class="card span-12"><div class="section-title">Run of Day — Sunday launch matrix</div>
+      <div style="overflow-x:auto">
+        <table class="run-matrix" style="min-width:860px">
+          <thead><tr><th>Milestone</th>${launches.map(x=>`<th>${esc(x)} launch</th>`).join('')}</tr></thead>
+          <tbody>${rows.map(r=>`<tr>
+            <td><strong>${esc(r[0])}</strong><div class="note">${esc(r[1])}</div></td>
+            ${launches.map(l=>`<td><strong>${esc(clockWindow(l,r[2],r[3]))}</strong></td>`).join('')}
+          </tr>`).join('')}</tbody>
+        </table>
+      </div>
+      <p class="note">These are planning windows, not pace targets. The first ~25 km stays deliberately cruisy; actual waypoint times move with wind, sea state, stops and group condition.</p>
     </div>
-    <div class="card span-7"><div class="section-title">Run of day</div><div class="timeline">
-      ${data.timeline.map(x=>`<div class="timeitem"><div class="time">${esc(x[0])}</div><div class="phase">${esc(x[1])}</div><div>${esc(x[2])}</div></div>`).join('')}
-    </div></div>
-    <div class="card span-5"><div class="section-title">Land reporting</div>
-      <p><strong>Barry</strong> is the contact on land for waypoint progress updates.</p>
-      <p>${esc(data.reportProtocol.at)}</p>
-      ${data.reportProtocol.fields.map(x=>`<div class="micro-row">${esc(x)}</div>`).join('')}
+    <div class="card span-12"><div class="section-title">Land reporting</div>
+      <p><strong>Barry</strong> is the contact on land for progress at RP01, Bullockmore/St John’s, RP02 and any material route or ETA change.</p>
+      <div class="field-grid">${data.reportProtocol.fields.map(x=>`<div>${esc(x)}</div>`).join('')}</div>
     </div>
   </div>`;
 }
@@ -86,6 +122,29 @@ function weather(){
     </div>
   </div>`;
   document.querySelector('#copyWeatherPrompt').onclick=()=>navigator.clipboard?.writeText(t.gptPrompt);
+}
+
+function initExitMap(){
+  exitMap=L.map('exitMap',{scrollWheelZoom:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'}).addTo(exitMap);
+  data.exits.forEach(x=>{
+    if(x.lat==null||x.lon==null) return;
+    const finish=x.kind.includes('FINISH');
+    const beach=/BEACH|SHORE/.test(x.kind);
+    const land=/LAND SUPPORT/.test(x.kind);
+    L.circleMarker([x.lat,x.lon],{
+      radius:finish?9:beach?6:land?5:7,
+      weight:finish?3:2,
+      fillOpacity:land?0.35:0.82,
+      dashArray:land?'4 3':null
+    }).bindPopup(`<strong>${esc(x.name)}</strong><br>${esc(x.kind)}<br>${esc(x.status)}<br>${esc(x.note)}`).addTo(exitMap);
+  });
+  data.aedPoints.forEach(x=>{
+    if(x.lat==null||x.lon==null) return;
+    L.marker([x.lat,x.lon],{title:x.name}).bindPopup(`<strong>AED — ${esc(x.name)}</strong><br>${esc(x.status)}<br>${esc(x.note)}`).addTo(exitMap);
+  });
+  const wholeBayAndExits=[[54.40,-8.95],[54.72,-8.10]];
+  exitMap.fitBounds(wholeBayAndExits,{padding:[18,18],maxZoom:9});
 }
 
 function documentation(){
