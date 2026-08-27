@@ -13,6 +13,20 @@ function softOperationalText(value){
     .replace(/Lead on Land/ig,'land contact');
 }
 
+function fitAedOverview(){
+  if(!exitMap) return;
+  exitMap.fitBounds([[54.40,-8.95],[54.72,-8.10]],{padding:[18,18],maxZoom:9});
+}
+
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));
+  const p=document.querySelector('#'+id); if(p) p.classList.add('active');
+  const b=document.querySelector(`[data-panel="${id}"]`); if(b) b.classList.add('active');
+  if(id==='route'&&map) setTimeout(()=>{map.invalidateSize();fitWholeBay();},80);
+  if(id==='access'&&exitMap) setTimeout(()=>{exitMap.invalidateSize();fitAedOverview();},80);
+}
+
 function setupNav(){
   const groups=[
     {label:'1 CONTROLS',items:[['control','Control'],['route','Route'],['timeline','Run of Day']]},
@@ -143,8 +157,7 @@ function initExitMap(){
     if(x.lat==null||x.lon==null) return;
     L.marker([x.lat,x.lon],{title:x.name}).bindPopup(`<strong>AED — ${esc(x.name)}</strong><br>${esc(x.status)}<br>${esc(x.note)}`).addTo(exitMap);
   });
-  const wholeBayAndExits=[[54.40,-8.95],[54.72,-8.10]];
-  exitMap.fitBounds(wholeBayAndExits,{padding:[18,18],maxZoom:9});
+  fitAedOverview();
 }
 
 function documentation(){
