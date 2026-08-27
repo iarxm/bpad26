@@ -1,272 +1,363 @@
 # Paddle the Bay 2026 — Site / Operations Task Ledger
 
-This file is the durable request ledger for the `bpad26` event-operations site and its corresponding Google Sheet.
+This is the durable request ledger for the `bpad26` event-operations site and its corresponding Google Sheet.
 
-Status convention:
+Status:
+- [x] implemented / materially complete in the relevant live surface
+- [~] implemented in planning form or partially complete, with a material verification/audit step still outstanding
+- [ ] requested and still outstanding
 
-- [x] implemented / materially complete
-- [ ] requested and still to be implemented or deployed
-- [~] partially implemented, researched, or designed but not yet complete in the live system
+Live site: https://iarxm.github.io/bpad26/  
+Repository: https://github.com/iarxm/bpad26  
+Native Google Sheet: https://docs.google.com/spreadsheets/d/1GU4_5E1IZZw8tJIYs9-1P7oSk91mnoZWKKEM4-X_0MA/edit
 
-The live deployment is: https://iarxm.github.io/bpad26/
+## 1. Chronological request history from the project thread
 
-The repository is: https://github.com/iarxm/bpad26
+This section records the user's directives in the order they emerged, so future agents can reconstruct intent rather than seeing only the current implementation.
 
-The native Google Sheet is: https://docs.google.com/spreadsheets/d/1GU4_5E1IZZw8tJIYs9-1P7oSk91mnoZWKKEM4-X_0MA/edit
+### Initial event-operations build
+- [x] Build a full Paddle the Bay 2026 event-operations website rather than only a promotional/fundraising page.
+- [x] Build a corresponding spreadsheet for manual entry/control in the visual style of the existing fundraising workbook.
+- [x] Cover route options, contingencies, times, waypoints, safety/emergencies, SOP/NOP, AED/access exits, emergency contacts, equipment and backup kits.
+- [x] Make Malin Beg / Silver Strand → Bundoran Boat Quay the primary event concept.
+- [x] Treat Saturday 29 August / Sunday 30 August 2026 as conditions-dependent candidate event days.
+- [x] Give particular attention to tidal/headland geometry and St John's Point.
+- [x] Include Bullockmore West Cardinal as a shared St John's control reference.
+- [x] Include route shortening / bailout concepts (Teelin, Killybegs/Fintra, receiving-coast alternatives).
+- [x] Keep actual route/offing conditional on current chart, conditions and skipper judgement.
 
-## 1. Core event-operations system
+### Spreadsheet / repository architecture
+- [x] Create the event-operations workbook with dedicated operational tabs.
+- [x] Convert the workbook into a native Google Sheet.
+- [x] Set Sheet locale/timezone to Ireland / Europe-Dublin.
+- [x] Move the project from the older `bpad` repo to `iarxm/bpad26`.
+- [x] Keep `data/event-plan.json` as the curated public runtime data model.
+- [x] Keep private roster/medical/internal phone information out of the public Pages dataset.
+- [x] Include a spreadsheet-export → JSON sync utility.
+- [x] Launch the static site on GitHub Pages.
+- [x] Configure automatic `main` → `gh-pages` → Pages publishing.
 
-- [x] Build a full operational site stack for Paddle the Bay 2026.
-- [x] Make the site an event-planning / event-control system rather than primarily a promotional site.
-- [x] Cover the planned paddle from Malin Beg to Bundoran Boat Quay.
-- [x] Treat Saturday 29 August or Sunday 30 August 2026 as selectable event days depending on wind / marine conditions.
-- [x] Create an operational control/dashboard view.
-- [x] Create route-options coverage.
-- [x] Create contingencies coverage.
-- [x] Create timing / run-of-show coverage.
-- [x] Create waypoint coverage.
-- [x] Create safety / emergency coverage.
-- [x] Create SOP / NOP coverage.
-- [x] Create access / exit point coverage.
-- [x] Create AED-location coverage.
-- [x] Create emergency-number and emergency-contact coverage.
-- [x] Create an equipment / kit list.
-- [x] Include backup / redundant kit planning.
-- [x] Include a roster / accountability structure while keeping sensitive participant data out of the public site.
-- [x] Include an event log structure.
-- [x] Include a sources / verification register.
+### First live-site refinement batch
+- [x] Zoom/frame the route map so the whole Donegal Bay operating area and route are visible.
+- [~] Replace misleading land-crossing/simple chord geometry with a water-oriented planning route; the primary route is deployed, but final marine-chart/event-day track verification remains mandatory.
+- [ ] Independently water-audit and plot exact alternative B/C/D geometries.
+- [x] Remove the `- not a navigational tool` wording from the header/subtitle while retaining substantive skipper/current-chart qualification elsewhere.
+- [x] Redesign the run of show so actual paddling can start at three intervals from 06:30–09:00.
+- [x] Use launch scenarios 06:30 / 07:45 / 09:00.
+- [x] Give each launch a 7–10 h duration envelope.
+- [x] Show finish envelopes 13:30–16:30 / 14:45–17:45 / 16:00–19:00.
+- [x] Explicitly treat the first ~25 km as slow/cruisy rather than an early pace target.
+- [x] Add a ~25 km ETA/conditions recalculation gate.
+- [x] Add a dedicated expanded Safety Plan to both site and Sheet.
+- [x] Add Carlston as Safety & Skipper Lead / final on-water safety-navigation authority.
+- [x] Add Barry Sweeney as Land Contact / float-plan and shore escalation lead.
+- [x] Keep Carlston/Barry private phone numbers off the public site.
+- [x] Find and surface a regional AED map for route-area verification.
+- [x] Add an emergency-services information card explaining what to communicate and how to state position.
+- [x] Add MAYDAY / PAN-PAN urgency cues.
+- [x] Add a browser/device geolocation helper showing WGS84 coordinates and nearest listed waypoint.
+- [x] Split the old single hazard register into `Safety hazards` and `Operational / route constraints`.
+- [x] Put ordinary headland/tide/rock/shoal routing effects in the operational-constraints register when their effect is mainly extra distance/time/access inconvenience.
+- [x] Put ordinary wind increase / cross-offshore drift in operational constraints when its effect is mainly VMG/time.
+- [x] Document escalation: an operational constraint becomes a safety hazard when group control, reliable recovery, communications or another required margin is lost.
+- [x] Treat routine safety-boat access inconvenience around rock/shore geometry as an operational constraint unless it materially delays casualty access.
 
-## 2. Spreadsheet as operational source-of-truth / manual control surface
+### Durable project management
+- [x] Create `.AGENTS/TASKS.md`.
+- [x] Use `[x]`, `[~]`, `[ ]` status semantics.
+- [x] Require future agents to update this ledger with new requests.
+- [x] Require completion status to reflect actual Sheet/repo/live deployment rather than merely drafted content.
+- [x] Verify that site changes propagate through the GitHub Pages pipeline.
 
-- [x] Create a corresponding spreadsheet for manual operational data entry and updating.
-- [x] Match the visual language already established in the Paddle the Bay fundraising workbook: Carlito, restrained grey section bands, compact operational tables, status fields and dashboard-like hierarchy.
-- [x] Include dedicated spreadsheet tabs for CONTROL, RUN_OF_SHOW, ROUTE_OPTIONS, WAYPOINTS, HAZARDS, ACCESS_AED, CONTACTS_COMMS, EQUIPMENT, WEATHER_TIDES, SOP_NOP, CONTINGENCIES, ROSTER, EVENT_LOG and SOURCES.
-- [x] Convert the operational workbook into a native Google Sheet.
-- [x] Set the native Sheet locale/timezone to Ireland / Europe-Dublin.
-- [x] Preserve `data/event-plan.json` as the site's public/runtime data model rather than exposing the whole Google Sheet directly.
-- [x] Keep sensitive roster/internal-contact information out of `event-plan.json` / public Pages output.
-- [x] Include a spreadsheet-export -> `event-plan.json` synchronization script in the repo.
-- [ ] Update the Google Sheet with the latest route, timing, command-role, hazard-register and expanded-safety-plan revisions requested on 27 Aug 2026.
+### Route optimisation requests
+- [x] Add the route chart itself to the site.
+- [x] Optimise route distance by using the shortest useful chords after clearance rather than tracing every bay/coast contour.
+- [x] Avoid steering unnecessarily toward headland apexes where a paddler could enter close-in tidal dynamics.
+- [x] Retain Bullockmore as a useful common St John's reference because dropping it saves little practical distance.
+- [x] Revise the initially very offshore route closer to land to improve extraction/support proximity.
+- [x] Use a `coastal-access-balanced` concept: comparatively near the northern coast, outward only around exposed/headland/shoal/tidal sectors, then efficient bay crossing.
+- [x] Update the primary planning distance to approximately 38.5 km for the current closer-coast geometry.
+- [~] Primary route control coordinates are planning geometry; Carlston/current chart/event-day observations still determine the actual offing and shallow-water/tidal clearance.
 
-## 3. Repository / deployment
+## 2. Core site stack
 
-- [x] Use the new `iarxm/bpad26` repository instead of the older `bpad` repository.
-- [x] Push the event-operations site into `bpad26`.
-- [x] Keep `main` as the working source branch.
-- [x] Launch the site on GitHub Pages.
-- [x] Make the live site available at `https://iarxm.github.io/bpad26/`.
-- [x] Configure automatic publishing from `main` through `gh-pages` / GitHub Pages.
-- [x] Include `.nojekyll` for static publishing.
+- [x] Static HTML/CSS/JS site with no build requirement.
+- [x] Leaflet / OpenStreetMap operational route view.
+- [x] Control dashboard.
+- [x] Route-options view.
+- [x] Run-of-show view.
+- [x] Dedicated Safety Plan view.
+- [x] Separate Hazards / Constraints view.
+- [x] Access / AED view.
+- [x] Emergency / Comms view.
+- [x] Equipment view.
+- [x] Sources / verification view.
+- [x] Responsive/mobile presentation.
+- [x] Restrained professional visual language compatible with the fundraising workbook style.
+- [x] Whole-bay map framing retained when switching route concepts.
+- [x] Static route chart displayed below the interactive map.
 
-## 4. Route design — original requirements
+## 3. Google Sheet operational control surface
 
-- [x] Represent Malin Beg -> Bundoran Boat Quay as the primary event route.
-- [x] Include route alternatives / shortened finishes rather than relying on a single all-or-nothing route.
-- [x] Include Teelin as an early bailout / decision point.
-- [x] Include Killybegs / Fintra as a northern-sector diversion / shortened-finish concept.
-- [x] Include Mullaghmore as an alternative southern-bay control / exit option.
-- [x] Include Creevy as a receiving-coast contingency access point.
-- [x] Include Bundoran Boat Quay as the finish / extraction point.
-- [x] Give special operational attention to St John's Point / Bullockmore.
-- [x] Include the Bullockmore cardinal buoy as a St John's navigation reference.
-- [x] Explicitly avoid treating headland shortcuts / tidal apexes as casual straight-line routing decisions.
-- [x] Make the actual route around St John's conditional on skipper judgement, current chart, tide/stream, sea state and visibility.
+- [x] `CONTROL`.
+- [x] `RUN_OF_SHOW`.
+- [x] `ROUTE_OPTIONS`.
+- [x] `WAYPOINTS`.
+- [x] `HAZARDS`.
+- [x] `ACCESS_AED`.
+- [x] `CONTACTS_COMMS`.
+- [x] `EQUIPMENT`.
+- [x] `WEATHER_TIDES`.
+- [x] `SOP_NOP`.
+- [x] `SAFETY_PLAN`.
+- [x] `CONTINGENCIES`.
+- [x] `ROSTER`.
+- [x] `EVENT_LOG`.
+- [x] `SOURCES`.
+- [x] Carlito / compact operational formatting.
+- [x] Updated primary route and current distance.
+- [x] Updated launch scenarios / finish envelopes.
+- [x] Updated hazard/constraint classification.
+- [x] Updated Carlston / Barry roles.
+- [x] Updated emergency call-card information.
+- [x] Updated regional AED map/source links.
+- [x] Updated SOP/NOP language so ordinary drift/time cost is separated from loss of safety margin.
 
-## 5. Route-map revisions requested after initial launch
+## 4. Current primary route — Route A
 
-- [ ] Change the default map framing so the whole of Donegal Bay and the entire primary route are visible at once at an appropriate zoom.
-- [~] Redesign the primary route geometry so the plotted polyline follows water around the Donegal coastline rather than drawing straight chords through land/headlands. Revised geometry has been designed/researched but is not yet deployed.
-- [ ] Update route waypoints/control points as necessary so no displayed route segment crosses a land boundary.
-- [ ] Recalculate / update the displayed primary-route distance after the water-only geometry is committed. The revised planning geometry was estimated at roughly 41 km rather than the earlier ~38 km chorded geometry.
-- [ ] Check all alternative route polylines for the same land-crossing issue.
-- [ ] Make the map retain a useful whole-bay overview when switching between route options, rather than over-zooming to the selected polyline.
+- [x] Start: Silver Strand / Malin Beg.
+- [x] Use nearer-shore coastal-access controls during the northern phase.
+- [x] Keep useful proximity to the Teelin extraction sector without requiring the route to enter the pier.
+- [x] Move outward for Muckross/headland clearance rather than aiming at the apex.
+- [x] Use Bullockmore West Cardinal as the St John's control reference.
+- [x] Use the efficient open-bay chord after Bullockmore.
+- [x] Transition through a Bundoran outer approach before Boat Quay.
+- [x] Current planning distance ≈38.5 km.
+- [~] Planning coordinates must be checked against the current marine chart / actual tidal stream / sea state before being treated as event-day navigation.
+- [ ] Record final event-day route/offing after Carlston's chart/conditions review.
 
-## 6. Site-header wording
+### Current Route A control sequence
+- [x] WP01 — Silver Strand / Malin Beg.
+- [x] CA01 — Malin Beg sea-room point.
+- [x] CA02 — Slieve League coastal corridor 1.
+- [x] CA03 — Slieve League / Teelin coastal corridor 2.
+- [x] CA04 — Teelin outer access corridor.
+- [x] CA05 — Muckross west/south offing.
+- [x] CA06 — Muckross east / St John's approach.
+- [x] WP04 — Bullockmore West Cardinal.
+- [x] CA07 — Bundoran outer approach.
+- [x] WP09 — Bundoran Boat Quay.
 
-- [ ] Remove the phrase `- not a navigational tool` from the site-header subtitle line.
-- [x] Preserve substantive safety qualification elsewhere in the site / README so removing that particular subtitle wording does not imply that the planning line supersedes current charts or skipper judgement.
+## 5. Alternative / shortened routes
 
-## 7. Run of show / launch-time scenarios
+- [x] Route B concept: Bullockmore → Mullaghmore → Bundoran.
+- [x] Route C concept: shortened Killybegs / Fintra finish.
+- [x] Route D concept: early Teelin finish.
+- [x] Hide misleading alternative polylines until individually audited.
+- [ ] Audit Route B water-only geometry / distance.
+- [ ] Audit Route C water-only geometry / distance.
+- [ ] Audit Route D water-only geometry / distance.
+- [ ] Re-enable plotted alternative polylines only after audit.
 
-- [x] Initial run-of-show tab exists.
-- [~] Redesign the launch model so actual paddling can begin anywhere from 06:30 to 09:00 using three planning intervals; specified but not yet deployed.
-- [ ] Use the three launch scenarios: 06:30, 07:45 and 09:00.
-- [ ] For each launch scenario, show a 7-10 hour possible paddle duration depending on wind / conditions.
-- [ ] Show the resulting finish envelope for 06:30 launch: 13:30-16:30.
-- [ ] Show the resulting finish envelope for 07:45 launch: 14:45-17:45.
-- [ ] Show the resulting finish envelope for 09:00 launch: 16:00-19:00.
-- [ ] Explicitly model the first ~25 km as a slow / cruisy coastal phase rather than an aggressive early pace target.
-- [ ] Add a ~25 km timing/conditions gate at which remaining ETA is recalculated from actual wind, pace and group condition.
-- [ ] Reflect these scenarios both in the Google Sheet and the public site.
+## 6. Run of show / pacing
 
-## 8. Expanded safety plan
+- [x] 06:30 launch scenario, 13:30–16:30 finish envelope.
+- [x] 07:45 launch scenario, 14:45–17:45 finish envelope.
+- [x] 09:00 launch scenario, 16:00–19:00 finish envelope.
+- [x] Use relative timing after launch instead of hard-coding downstream clock times.
+- [x] First ~25 km deliberately cruisy.
+- [x] ~25 km pace / conditions / ETA recalculation.
+- [x] Update Barry with changed ETA / route / extraction plan.
+- [x] Keep full 7–10 h envelope dependent on wind/VMG/group state.
+- [ ] Enter final chosen launch scenario on event day.
 
-- [x] Existing site and Sheet contain hazard, SOP/NOP, contingency, emergency-comms and equipment safety material.
-- [~] A fuller safety-plan architecture has been designed/researched but has not yet been added as its own complete tab/view.
-- [ ] Add a dedicated expanded `SAFETY_PLAN` (or equivalently named) Google Sheet tab.
-- [ ] Add an expanded safety-plan view/section to the site.
-- [ ] Define command hierarchy and decision authority.
-- [ ] Define pre-launch safety checks.
-- [ ] Define paddler accountability / buddy or pod procedure.
-- [ ] Define safety-boat positioning and recovery responsibilities.
-- [ ] Define routine on-water headcounts / position reports.
-- [ ] Define incident escalation states.
-- [ ] Define person-in-water / separated-paddler response.
-- [ ] Define casualty recovery / transfer procedure.
-- [ ] Define serious medical incident procedure.
-- [ ] Define hypothermia / immersion response.
-- [ ] Define equipment failure / board failure / paddle failure response.
-- [ ] Define safety-boat failure response.
-- [ ] Define reduced-visibility / group-control response.
-- [ ] Define collision / marine-traffic response.
-- [ ] Define lost-comms response and redundant communications.
-- [ ] Define route shortening / extraction procedure.
-- [ ] Define post-incident accountability / event termination procedure.
+## 7. Expanded Safety Plan
 
-## 9. Named event roles
+### Command
+- [x] Carlston — Safety & Skipper Lead.
+- [x] Carlston controls final launch, actual route/offing, continuation, diversion, recovery and termination.
+- [x] Barry Sweeney — Land Contact.
+- [x] Barry holds float plan, launch/finish envelope, accountability state, extraction/AED list and shore escalation chain.
 
-- [ ] Add Carlston as `Safety & Skipper Lead` / final on-water safety authority.
-- [ ] Add Carlston to the internal contacts/command structure while leaving his mobile number as a private/manual-entry field unless explicitly provided for private use.
-- [ ] Add Barry Sweeney as `Land Contact`.
-- [ ] Define Barry Sweeney's land-contact responsibilities: hold float plan, expected timing window, route/access information and shore-side contact/escalation chain.
-- [ ] Keep Barry's private mobile number out of the public site unless explicitly authorised.
+### Pre-launch
+- [x] Roster / pod / buddy accountability.
+- [x] Safety-boat fuel/mechanical/recovery check.
+- [x] Chart/plotter/GPS check.
+- [x] Primary + backup VHF check.
+- [x] Event AED / first aid / hypothermia kit check.
+- [x] Spare board / paddles / repair capability.
+- [x] Exit / driver / vehicle chain.
+- [x] Float plan to Barry.
 
-## 10. AED verification / mapping
+### Normal operations
+- [x] Lead / sweep / pod structure.
+- [x] Headcount after major gates/stops/issues.
+- [x] Predictable safety-boat support position.
+- [x] Cruisy first ~25 km.
+- [x] Fuel/hydrate by elapsed time.
+- [x] Barry position / decision updates.
 
-- [x] Include initial AED/access entries for Malin Beg, Teelin, Killybegs sector, Bundoran and other route access locations.
-- [x] Include the Glencolmcille AED source for Malinbeg / Teelin verification.
-- [x] Include Donegal Bay Community First Responders as a regional AED-verification source in the spreadsheet source register.
-- [~] Identify an interactive regional AED map suitable for verification: Donegal Bay Community First Responders' AED map. It has been researched but is not yet surfaced prominently in the site.
-- [ ] Add a clear link to the verified/regional AED map from the Access/AED section of the site.
-- [ ] Add the AED-map link and verification guidance to the updated Google Sheet.
-- [ ] Verify the exact cabinet location/access status for each route-relevant public AED shortly before the event.
-- [ ] Distinguish public-access / 24-hour AEDs from AEDs accessible only during opening/lifeguard hours where the source provides that distinction.
-- [ ] Retain the principle that an event-carried checked AED is preferable to depending solely on an unverified shore cabinet.
+### Incident states
+- [x] GREEN normal operations.
+- [x] AMBER operational constraint/minor incident.
+- [x] RED loss of control/recovery margin / serious incident.
 
-## 11. Emergency-services communication plan
+### Emergency / abnormal procedures
+- [x] Separated paddler / person in water.
+- [x] Casualty recovery / transfer.
+- [x] Serious medical event.
+- [x] Immersion / hypothermia.
+- [x] Board / paddle / leash failure.
+- [x] Safety-boat failure.
+- [x] Reduced visibility / group-control loss.
+- [x] Collision / marine traffic.
+- [x] Lost emergency communications.
+- [x] Route shortening / extraction.
+- [x] Event termination / final accountability.
 
-- [x] Site includes `112 / 999 -> COAST GUARD`.
-- [x] Site includes marine VHF Channel 16.
-- [x] Site includes Malin Head MRSC contact details.
-- [x] Site includes Bundoran RNLI station contact, distinguished from emergency activation.
-- [~] A fuller emergency-call information card has been designed from Irish maritime guidance but is not yet deployed.
-- [ ] Add an explicit emergency-services communication card to the site and Sheet.
-- [ ] Include `WHO`: Paddle the Bay group / safety boat identity and VHF callsign if assigned.
-- [ ] Include `WHERE`: current WGS84 GPS latitude/longitude.
-- [ ] Include `WHERE`: nearest named route waypoint / headland / pier as a human-readable secondary location.
-- [ ] Include drift direction / movement when relevant.
-- [ ] Include `WHAT`: concise nature of the problem / distress.
-- [ ] Include `HELP`: assistance required.
-- [ ] Include `PEOPLE`: total people involved, number of casualties, number in the water, and consciousness/breathing status where relevant.
-- [ ] Include `CONDITIONS`: wind, sea/swell and visibility relevant to rescuers.
-- [ ] Include `RESOURCES`: safety boat, first-aid kit, AED, VHF, PLB/beacon or other resources already on scene.
-- [ ] Include `INTENT`: holding position, recovering casualty, drifting, or moving toward a named extraction point.
-- [ ] Include an immediately readable MAYDAY / PAN-PAN decision cue based on the seriousness/urgency of the situation.
-- [ ] Make current GPS position easy for the safety-boat/skipper to read/transmit without translating from a vague map position under stress.
+## 8. Safety hazards
 
-## 12. Hazard register reclassification
+- [x] Group separation / loss of visual control.
+- [x] Serious illness / injury / medical event.
+- [x] Immersion / hypothermia.
+- [x] Fatigue severe enough to degrade capability.
+- [x] Critical board / paddle / leash failure.
+- [x] Safety-boat failure.
+- [x] Collision / marine traffic.
+- [x] Visibility loss severe enough to lose control.
+- [x] Thunder / lightning.
+- [x] Loss of emergency communications / accurate position.
+- [x] Casualty extraction delay.
 
-- [x] Initial single hazard register exists.
-- [~] New two-register classification has been conceptually designed but is not yet deployed.
-- [ ] Replace the single public hazard presentation with two clearly separated registers: `SAFETY HAZARDS` and `OPERATIONAL / ROUTE CONSTRAINTS`.
+## 9. Operational / route constraints
 
-### Safety hazards — intended register
+- [x] Tidal acceleration / compression around headlands.
+- [x] Rock geometry forcing route / safety-boat inconvenience.
+- [x] Bullockmore / St John's shoal/cardinal geometry.
+- [x] Wind increase / cross-offshore component as VMG/time cost while controllable.
+- [x] Muckross / headland offing requirements.
+- [x] Harbour / pier depth/access.
+- [x] Finish-area/public-event logistics.
+- [x] Routine safety-boat access inconvenience near coast.
+- [x] Explicit safety escalation threshold when control/recovery margin is lost.
 
-- [ ] Group separation / loss of visual contact.
-- [ ] Serious illness / injury / medical event.
-- [ ] Immersion / hypothermia / cold exposure.
-- [ ] Fatigue severe enough to degrade safe paddling capability.
-- [ ] Critical board / paddle / leash or other equipment failure where control/recovery is compromised.
-- [ ] Safety-boat mechanical / operational failure.
-- [ ] Collision / marine traffic hazard.
-- [ ] Visibility degradation severe enough to lose reliable group / escort control.
-- [ ] Thunder / lightning.
-- [ ] Loss of emergency communications / inability to transmit an accurate position.
-- [ ] Difficult casualty extraction where delay meaningfully changes medical risk.
+## 10. Emergency services / communications
 
-### Operational / route constraints — intended register
+- [x] `112 / 999 → COAST GUARD`.
+- [x] VHF Channel 16.
+- [x] Malin Head MRSC contact.
+- [x] Bundoran RNLI station contact distinguished from emergency activation.
+- [x] MAYDAY cue for grave/imminent danger.
+- [x] PAN-PAN cue for urgent but not presently grave/imminent situations.
+- [x] WHO field.
+- [x] WHERE — WGS84 latitude/longitude.
+- [x] WHERE — nearest named waypoint/headland/pier.
+- [x] Drift/movement if relevant.
+- [x] WHAT.
+- [x] HELP.
+- [x] PEOPLE / casualties / people in water / consciousness-breathing as relevant.
+- [x] CONDITIONS.
+- [x] RESOURCES already on scene.
+- [x] INTENT.
+- [x] Browser/device `Use this device's position` helper.
+- [x] Nearest listed waypoint calculation.
+- [ ] Confirm safety-boat VHF callsign / working channel if one will be used.
+- [ ] Print / laminate an offline emergency card for the crew.
 
-- [ ] Tidal acceleration / compression around headlands, principally as a speed / distance / route-choice constraint for this event.
-- [ ] Rock geometry around headlands where it mainly forces a wider paddle line.
-- [ ] Bullockmore / St John's shoals / rocks / cardinal-buoy geometry as route/time constraints under normal controllable conditions.
-- [ ] Wind increase / cross-offshore component where its principal effect is poorer VMG, drift correction and a longer paddle.
-- [ ] Muckross / other headland offing requirements.
-- [ ] Harbour / pier depth or access constraints.
-- [ ] Finish-area / public-event logistics.
-- [ ] Safety-boat access inconvenience caused by rocks / close-coast geometry where this remains minor rather than casualty-critical.
+## 11. AED / extraction planning
 
-### Escalation principle
+- [x] Regional Donegal Bay Community First Responders AED map surfaced.
+- [x] Explain red public-access / amber restricted-hours marker distinction.
+- [x] Malin Beg locality AED verification entry.
+- [x] Teelin locality AED verification entry.
+- [x] Killybegs / Island House AED verification entry.
+- [x] Bundoran Main Beach seasonal/lifeguard AED entry.
+- [x] Bundoran Boat Quay / RNLI finish interface.
+- [x] Creevy receiving-coast option.
+- [x] Mullaghmore alternative option.
+- [x] Retain event-carried checked AED as preferred rather than relying exclusively on shore cabinets.
+- [ ] Re-verify exact cabinet locations / access / service status immediately before event.
+- [ ] Enter the actual event AED custodian/location in the crew Sheet.
+- [ ] Confirm vehicle rendezvous / landing practicality for each intended extraction point.
 
-- [ ] Document that an operational constraint can become a safety hazard when magnitude/context changes. Example: cross-offshore wind is normally a time/VMG problem, but becomes a safety issue if the paddler group can no longer maintain control or the safety boat can no longer reliably recover a paddler.
-- [ ] Reflect the user's event-specific judgement that rock/tidal/headland geometry is generally a routing/time issue for this competent team, without deleting the separate possibility that difficult safety-boat casualty access can become safety-relevant during an incident.
+## 12. Equipment / redundancy
+
+- [x] SUP per paddler + backup board.
+- [x] Primary paddles + spares.
+- [x] PFD / buoyancy aids.
+- [x] Appropriate leash systems.
+- [x] Thermal / dry equipment.
+- [x] Carbohydrate / hydration / electrolyte reserve.
+- [x] Redundant waterproof VHF.
+- [x] PLB / satellite distress beacon.
+- [x] Waterproof phone backup.
+- [x] Current chart / plotter / GPS.
+- [x] Tow / recovery lines + cutting tool.
+- [x] First-aid / trauma kit.
+- [x] Checked event AED.
+- [x] Hypothermia kit.
+- [x] Printed route / contacts / roster / emergency card.
+- [x] Vehicle key / fuel / driver redundancy.
+- [x] Repair / pump / fin-leash hardware.
 
 ## 13. Weather / tide / decision architecture
 
-- [x] Include a weather/tide decision log.
-- [x] Include Saturday/Sunday comparison fields.
-- [x] Include decision gates before the event and event morning.
-- [x] Include marine-warning, wind/gust, sea/swell, visibility and thunder fields.
-- [x] Include sunrise/sunset/daylight planning.
-- [x] Include tide-reference information with warning that reference-station tide height is not the same as local tidal stream around a headland.
-- [ ] Reconcile the weather/wind language with the new two-register model so moderate cross/offshore wind is not automatically presented as a life-safety hazard when it is only increasing paddle time, while preserving a safety escalation threshold for loss of control/recovery margin.
+- [x] Marine warning check.
+- [x] Wind / gust / direction review.
+- [x] Sea / swell / visibility review.
+- [x] Thunder/lightning veto.
+- [x] Tide reference / headland-stream distinction.
+- [x] Event-day final decision.
+- [x] Moderate manageable wind/drift treated as operational time/VMG issue rather than automatically a life-safety hazard.
+- [x] Safety veto retained when wind/sea removes group control or reliable recovery.
+- [ ] Enter final event-day actuals / observations.
+- [ ] Record final selected St John's/Bullockmore line.
 
-## 14. Equipment / redundancy
+## 14. Privacy / public vs crew data
 
-- [x] SUP per paddler.
-- [x] Spare board planning.
-- [x] Primary paddles plus spare paddles.
-- [x] PFD / buoyancy-aid planning.
-- [x] Leash-system planning.
-- [x] Thermal / dry clothing planning.
-- [x] Hydration / carbohydrate / electrolyte planning.
-- [x] Waterproof VHF redundancy.
-- [x] PLB / distress-beacon planning.
-- [x] Waterproof mobile-phone backup.
-- [x] Safety-craft navigation / communications system.
-- [x] Tow / recovery equipment.
-- [x] First-aid / trauma kit.
-- [x] AED planning.
-- [x] Hypothermia kit.
-- [x] Printed route / contacts / roster backup.
-- [x] Vehicle-key / fuel / driver redundancy.
-- [x] Repair kit / pump / hardware backup.
+- [x] Public site uses curated `event-plan.json`.
+- [x] Private roster/medical fields remain out of public Pages.
+- [x] Carlston / Barry names and roles may be public operational information.
+- [x] Carlston / Barry mobile numbers remain crew-only unless explicitly authorised otherwise.
+- [x] Google Sheet remains richer than public site.
+- [x] Public device-position helper calculates locally in the user's browser; it does not require storing the user's position in `event-plan.json`.
 
-## 15. Privacy / public-vs-crew data separation
+## 15. Deployment / verification
 
-- [x] Keep `event-plan.json` as a curated public dataset rather than exposing the whole Sheet.
-- [x] Keep participant emergency contacts and medical information out of public Pages.
-- [x] Keep internal mobile numbers as manual/private fields.
-- [x] Make the Google Sheet the richer crew-facing operational document.
-- [ ] Ensure Carlston / Barry role additions follow the same privacy split when deployed.
+- [x] `iarxm/bpad26` is canonical repo.
+- [x] `main` is working source branch.
+- [x] GitHub Pages enabled.
+- [x] Automatic publish workflow exists.
+- [x] `.nojekyll` present.
+- [x] Previous deployment pipeline verified end-to-end.
+- [x] Current expanded timing/safety/route changes pushed to `main`.
+- [ ] Verify the latest expanded-change commit completes `main → gh-pages → Pages` after this task-ledger update.
+- [ ] Inspect live mobile and desktop presentation after deployment and log any defects here.
 
-## 16. Current highest-priority implementation batch
+## 16. Known outstanding work
 
-The following is the outstanding batch from the latest user revision and should be treated as the next implementation target:
-
-- [ ] Deploy water-only route geometry and whole-Donegal-Bay map framing.
-- [ ] Remove `- not a navigational tool` from the header subtitle.
-- [ ] Deploy the 06:30 / 07:45 / 09:00 launch scenarios and 7-10 h finish envelopes.
-- [ ] Add the first-25-km cruisy-phase / recalculation logic.
-- [ ] Add the expanded full safety-plan tab/view.
-- [ ] Add Carlston as Safety & Skipper Lead.
-- [ ] Add Barry Sweeney as Land Contact.
-- [ ] Surface the verified/regional AED map and improve AED verification status.
-- [ ] Add the emergency-services location/problem communication card.
-- [ ] Split hazards from route/time constraints.
-- [ ] Move headland/tide/rock/shoal constraints and ordinary cross-offshore-drift/time effects into the operational-constraints register.
-- [ ] Update the native Google Sheet.
-- [ ] Update `data/event-plan.json`.
-- [ ] Update the site rendering.
-- [ ] Verify GitHub Pages redeploys successfully after the changes.
+- [ ] Exact marine-chart/event-day validation of Route A offing and shallow-water/tidal clearance.
+- [ ] Route B exact water-only geometry audit.
+- [ ] Route C exact water-only geometry audit.
+- [ ] Route D exact water-only geometry audit.
+- [ ] Event-day AED cabinet/service/access re-verification.
+- [ ] Final crew names/numbers/callsigns/working channel in the private Sheet.
+- [ ] Final driver / vehicle / rendezvous assignment.
+- [ ] Final weather/tide/visibility observations.
+- [ ] Final launch scenario.
+- [ ] Final float-plan issue to Barry.
+- [ ] Printed/offline crew pack.
 
 ## 17. Maintenance rule for future agents
 
-When the user makes a new site/operations request:
+When a new site/operations request is made:
 
-1. Add the request to this ledger before or alongside implementation.
-2. Decompose it into testable items rather than recording only a vague parent request.
-3. Mark `[x]` only after the change exists in the actual repo / Google Sheet / live Pages surface as applicable.
-4. Use `[~]` where research/design is complete but deployment is not.
-5. Never mark a Google-Sheet request complete solely because the equivalent text exists in `event-plan.json`, or vice versa.
-6. Preserve the public-vs-private data boundary: public `event-plan.json` must not absorb private roster/contact/medical fields.
-7. Recheck live deployment after site changes rather than assuming a successful commit equals a successful Pages deployment.
+1. Add it to this ledger before or alongside implementation.
+2. Preserve the user's original operational intent, not merely the latest wording.
+3. Decompose requests into testable items.
+4. Mark `[x]` only when the change exists in the relevant actual surface: repo, Google Sheet and/or live Pages.
+5. Use `[~]` where the implementation is a planning approximation or still needs a real-world verification/audit.
+6. Do not mark a Sheet request complete merely because an equivalent exists in `event-plan.json`, or vice versa.
+7. Preserve the public/private data boundary.
+8. For route changes, distinguish planning geometry from event-day navigation and retain skipper/current-chart authority.
+9. Recheck the Pages workflow and live site after substantive site changes.
