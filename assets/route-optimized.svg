@@ -20,23 +20,25 @@
 <text x="678" y="26" font-family="Arial,sans-serif" font-size="23" font-weight="700" text-anchor="middle" fill="#111">Paddle the Bay 2026 — Coastal-access-balanced primary route</text>
 <text x="678" y="790" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#222">Longitude</text>
 <text x="22" y="390" font-family="Arial,sans-serif" font-size="15" text-anchor="middle" fill="#222" transform="rotate(-90 22 390)">Latitude</text>
-<polyline points="216.2,129.9 222.6,156.6 295.5,190.7 377.4,219.6 459.4,248.4 541.4,293.0 619.7,319.2 719.1,386.2 1094.7,598.5 1107.7,621.6" fill="none" stroke="#1676a8" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="216.2,129.9 222.6,156.6 295.5,190.7 377.4,219.6 459.4,248.4 541.4,293.0 589.3,317.4 619.7,319.2 719.1,386.2 906.9,492.3 1094.7,598.5 1107.7,621.6" fill="none" stroke="#1676a8" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
 <circle cx="216.2" cy="129.9" r="5.5" fill="#1676a8"/><text x="223.2" y="122.9" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">0</text>
 <circle cx="222.6" cy="156.6" r="5.5" fill="#1676a8"/><text x="229.6" y="149.6" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">1</text>
 <circle cx="295.5" cy="190.7" r="5.5" fill="#1676a8"/><text x="302.5" y="183.7" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">2</text>
 <circle cx="377.4" cy="219.6" r="5.5" fill="#1676a8"/><text x="384.4" y="212.6" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">3</text>
 <circle cx="459.4" cy="248.4" r="5.5" fill="#1676a8"/><text x="466.4" y="241.4" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">4</text>
 <circle cx="541.4" cy="293.0" r="5.5" fill="#1676a8"/><text x="548.4" y="286.0" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">5</text>
-<circle cx="619.7" cy="319.2" r="5.5" fill="#1676a8"/><text x="626.7" y="312.2" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">6</text>
-<circle cx="719.1" cy="386.2" r="5.5" fill="#1676a8"/><text x="726.1" y="379.2" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">7</text>
-<circle cx="1094.7" cy="598.5" r="5.5" fill="#1676a8"/><text x="1101.7" y="591.5" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">8</text>
-<circle cx="1107.7" cy="621.6" r="5.5" fill="#1676a8"/><text x="1114.7" y="614.6" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">9</text>
+<circle cx="589.3" cy="317.4" r="7" fill="#111"/><text x="597.3" y="309.4" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111">RP01 — report to Barry</text>
+<circle cx="619.7" cy="319.2" r="5.5" fill="#1676a8"/><text x="626.7" y="312.2" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">7</text>
+<circle cx="719.1" cy="386.2" r="5.5" fill="#1676a8"/><text x="726.1" y="379.2" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">8</text>
+<circle cx="906.9" cy="492.3" r="7" fill="#111"/><text x="914.9" y="484.3" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#111">RP02 — report to Barry</text>
+<circle cx="1094.7" cy="598.5" r="5.5" fill="#1676a8"/><text x="1101.7" y="591.5" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">10</text>
+<circle cx="1107.7" cy="621.6" r="5.5" fill="#1676a8"/><text x="1114.7" y="614.6" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#111">11</text>
 <rect x="225.2" y="132.9" width="131.4" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="228.2" y="147.9" font-family="Arial,sans-serif" font-size="13" fill="#111">Launch — Malin Beg</text>
 <rect x="466.4" y="219.4" width="204.4" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="469.4" y="234.4" font-family="Arial,sans-serif" font-size="13" fill="#111">Teelin outer access corridor</text>
 <rect x="548.4" y="296.0" width="110.0" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="551.4" y="311.0" font-family="Arial,sans-serif" font-size="13" fill="#111">Muckross offing</text>
 <rect x="726.1" y="391.2" width="160.6" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="729.1" y="406.2" font-family="Arial,sans-serif" font-size="13" fill="#111">Bullockmore W Cardinal</text>
 <rect x="1101.7" y="571.5" width="167.9" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="1104.7" y="586.5" font-family="Arial,sans-serif" font-size="13" fill="#111">Bundoran outer approach</text>
 <rect x="1114.7" y="598.6" width="131.4" height="20" rx="2" fill="white" fill-opacity=".88"/><text x="1117.7" y="613.6" font-family="Arial,sans-serif" font-size="13" fill="#111">Finish — Boat Quay</text>
-<rect x="94" y="719" width="820" height="20" rx="2" fill="white" fill-opacity=".9"/>
-<text x="98" y="734" font-family="Arial,sans-serif" font-size="13" fill="#222">Planning geometry ≈ 38.5 km • nearer-shore northern corridor, extra sea room only around exposed/headland sectors</text>
+<rect x="94" y="719" width="970" height="20" rx="2" fill="white" fill-opacity=".9"/>
+<text x="98" y="734" font-family="Arial,sans-serif" font-size="13" fill="#222">Planning geometry ≈ 38.5 km • RP01/RP02 are reporting gates to Barry • final water line remains skipper/current-chart controlled</text>
 </svg>
