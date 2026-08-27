@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Paddle the Bay 2026 — Event Operations</title>
+<meta name="theme-color" content="#3f3f3f" />
+<link rel="preconnect" href="https://unpkg.com" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="assets/styles.css" />
+<script src="config.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div><div class="eyebrow">PADDLE THE BAY 2026</div><h1>Event Operations Control</h1></div>
+  <div id="overallStatus" class="status hold">HOLD</div>
+</header>
+<div class="warning"><strong>Planning/control tool — not a navigational chart.</strong> Final GO and the actual St John’s/Bullockmore line require the current chart, marine forecast, tide/stream, observations and named Safety Lead / skipper approval.</div>
+<nav id="tabs" class="tabs"></nav>
+<main>
+<section id="control" class="panel active"></section>
+<section id="route" class="panel"></section>
+<section id="timeline" class="panel"></section>
+<section id="safety" class="panel"></section>
+<section id="access" class="panel"></section>
+<section id="comms" class="panel"></section>
+<section id="kit" class="panel"></section>
+<section id="sources" class="panel"></section>
+</main>
+<footer>Operational dataset: <span id="dataMode"></span> · refreshed <span id="refreshed"></span></footer>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
