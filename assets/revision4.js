@@ -11,7 +11,7 @@ function addWaypointIfMissing(w){
 }
 
 function applySundayOperationalData(){
-  if(sundayRevisionApplied || !window.data) return;
+  if(sundayRevisionApplied || !data) return;
   sundayRevisionApplied = true;
 
   // AED carriage policy: keep shore access planning, remove a standard AED from small wet-craft inventory.
