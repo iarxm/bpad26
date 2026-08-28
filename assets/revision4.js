@@ -1,7 +1,8 @@
-// Sunday operational refinement — AED carriage policy + Sunday coastal working route.
+// Sunday operational refinement — AED carriage policy + coastal working route + forecast briefing.
 const controlRevision3 = window.control;
 const documentationRevision3 = window.documentation;
 const routeRevisionBase = window.route;
+const weatherRevisionBase = window.weather;
 const primaryBeforeSunday = window.primary;
 let sundayRevisionApplied = false;
 
@@ -66,6 +67,53 @@ function applySundayOperationalData(){
   }
   data.routeOptions = [sundayRoute, ...(data.routeOptions || []).filter(r => r.id !== 'E')];
   data.meta.routePrinciple = 'Sunday working concept: stay close enough to the northern coast for practical extraction, step out around headland / rock / shallow-water dynamics, continue farther down the west side of St John’s, then make the straightest useful crossing to Bundoran once the actual wind angle is acceptable.';
+
+  // Forecast snapshot: authoritative wording is intentionally preserved as uncertainty rather than false directional precision.
+  data.sundayForecastSnapshot = {
+    prepared:'Friday 28 August 2026 — based on Met Éireann 14:21 national forecast + 05:30 Sea Area Forecast',
+    confidence:'DIRECTION LOW / MODERATE — refresh Saturday evening and Sunday pre-launch',
+    headline:'Sunday currently looks potentially workable but uncertain: wet start, heavy/possibly thundery rain, and moderate to fresh winds variable in direction. No Sunday weather or marine warning is currently in operation, but that can change.',
+    marineContext:'The official marine outlook only reaches 06:00 Sunday: it indicates southeast to south winds developing in the west Saturday night, with lighter to moderate variable winds elsewhere. The daytime Sunday national forecast then becomes moderate to fresh and variable in direction.',
+    segments:[
+      {
+        name:'1 — Coastal north / west',
+        distance:'0–15 km',
+        route:'Malin Beg → Teelin → Muckross south',
+        relative:'T+0 to about T+3 h',
+        clocks:'06:30 start: ~06:30–09:30 · 07:45: ~07:45–10:45 · 09:00: ~09:00–12:00',
+        wind:'Early signal: S–SE or variable around the dawn transition; intensity may begin light–moderate but Sunday guidance allows moderate–fresh as the morning develops.',
+        weather:'Cloudy/wet start; rain may be heavy and possibly thundery. Visibility can deteriorate sharply in precipitation.',
+        effect:'The shore-led line is useful here. Treat the forecast direction as provisional and use actual wind/sea observations to choose offing around Teelin and Muckross.'
+      },
+      {
+        name:'2 — Muckross / Fintra / St John’s west side',
+        distance:'15–28 km',
+        route:'Muckross → Fintra → down the west side of St John’s',
+        relative:'About T+3 to T+6 h',
+        clocks:'06:30 start: ~09:30–12:30 · 07:45: ~10:45–13:45 · 09:00: ~12:00–15:00',
+        wind:'Official Sunday wording: moderate to fresh, variable in direction. The bending coastal course means the wind can move between crosswind, headwind and quartering components over a short period.',
+        weather:'Rain gradually works northeastward; heavy bursts / thunder remain possible before brighter intervals and scattered showers develop.',
+        effect:'Keep the long coastal option available. The key decision is not a forecast compass bearing but whether actual wind angle, gusts and sea state still favour continuing down the peninsula versus shortening/diverting.'
+      },
+      {
+        name:'3 — Open Bay commitment',
+        distance:'28–42.9 km',
+        route:'St John’s south crossing gate → Bundoran Boat Quay',
+        relative:'About T+6 to T+10 h',
+        clocks:'06:30 start: ~12:30–16:30 · 07:45: ~13:45–17:45 · 09:00: ~15:00–19:00',
+        wind:'Plan on moderate to fresh wind with direction still uncertain. A side/quartering wind may make this workable, but the present forecast does not guarantee that angle.',
+        weather:'Rain should progressively clear northeast, followed by sunny spells and scattered showers; local shower gusts and visibility changes remain possible.',
+        effect:'This is the exposed decision gate. Commit only from the actual observed wind/sea picture with enough VMG, group-control and recovery margin; the farther-down St John’s route lets the crossing be delayed until that assessment is made.'
+      }
+    ],
+    sources:[
+      ['Met Éireann National Forecast','https://www.met.ie/forecasts/accessible-forecast/'],
+      ['Met Éireann Sea Area Forecast','https://www.met.ie/forecasts/marine-inland-lakes?prn=1'],
+      ['Met Éireann Sunday Warnings','https://www.met.ie/warnings/sunday'],
+      ['Met Éireann Killybegs model page','https://www.met.ie/weather-forecast/killybegs-donegal'],
+      ['Met Éireann Bundoran model page','https://www.met.ie/weather-forecast/bundoran-donegal']
+    ]
+  };
 }
 
 window.primary = function(){
@@ -91,6 +139,33 @@ window.route = function(){
     if(title) title.textContent = 'Shorter Route A chart — comparison only';
     if(note) note.textContent = 'The interactive map above is the current Sunday working route. This older static chart is retained only for comparison until the coastal chart is redrawn.';
   }
+};
+
+window.weather = function(){
+  weatherRevisionBase();
+  const root = document.querySelector('#weather > .grid');
+  const f = data.sundayForecastSnapshot;
+  if(!root || !f || document.querySelector('[data-weather="sunday-brief"]')) return;
+
+  const brief = document.createElement('div');
+  brief.className = 'card span-12';
+  brief.dataset.weather = 'sunday-brief';
+  brief.innerHTML = `<div class="section-title">Sunday route weather briefing — current planning snapshot</div>
+    <p><strong>${esc(f.headline)}</strong></p>
+    <p>${esc(f.marineContext)}</p>
+    <div class="report-box"><strong>${esc(f.confidence)}</strong><div>${esc(f.prepared)}</div></div>
+    <div style="overflow-x:auto;margin-top:12px"><table style="min-width:980px">
+      <thead><tr><th>Segment / timing</th><th>Wind direction + intensity</th><th>Weather</th><th>Route implication</th></tr></thead>
+      <tbody>${f.segments.map(s=>`<tr>
+        <td><strong>${esc(s.name)}</strong><div>${esc(s.route)}</div><div class="note">${esc(s.distance)} · ${esc(s.relative)}</div><div class="note">${esc(s.clocks)}</div></td>
+        <td>${esc(s.wind)}</td>
+        <td>${esc(s.weather)}</td>
+        <td>${esc(s.effect)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div>
+    <p class="hard">Do not treat the present “variable” forecast as proof of a sidewind. Re-run this forecast Saturday evening, Sunday before launch, and again before the St John’s crossing gate using current observations.</p>
+    <div class="source-grid">${f.sources.map(s=>`<div class="source-card"><strong>${esc(s[0])}</strong><br><a href="${esc(s[1])}" target="_blank" rel="noreferrer">Open current source</a></div>`).join('')}</div>`;
+  root.prepend(brief);
 };
 
 window.documentation = function(){
