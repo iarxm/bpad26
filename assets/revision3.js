@@ -1,6 +1,7 @@
 // Role-label refinement: keep volunteer language light while making lead roles easy to find.
-const controlRevision2 = control;
-const commsRevision2 = comms;
+const controlRevision2 = window.control;
+const commsRevision2 = window.comms;
+const previousSoftOperationalText = window.softOperationalText;
 
 function leadStrip(){
   const wrap=document.createElement('div');
@@ -20,7 +21,14 @@ function leadStrip(){
   return wrap;
 }
 
-function control(){
+window.softOperationalText = function(value){
+  return previousSoftOperationalText(value)
+    .replace(/Barry Sweeney/ig,'Barry')
+    .replace(/Safety\s*&\s*Skipper Lead/ig,'Safety Lead')
+    .replace(/Lead on Land/ig,'Land Lead');
+};
+
+window.control = function(){
   controlRevision2();
   const grid=document.querySelector('#control > .grid');
   if(grid) grid.prepend(leadStrip());
@@ -34,9 +42,9 @@ function control(){
         <p class="hard">Sunday is scheduled; conditions still decide whether we start or continue.</p>`;
     }
   });
-}
+};
 
-function comms(){
+window.comms = function(){
   commsRevision2();
   document.querySelectorAll('#comms .contact').forEach(card=>{
     const heading=card.querySelector('h3');
@@ -51,16 +59,7 @@ function comms(){
       if(note) note.textContent='Land contact for live location, waypoint progress and shore-side relays.';
     }
   });
-}
-
-// Remove Barry's surname and normalize lead wording wherever older public copy still surfaces.
-const previousSoftOperationalText = softOperationalText;
-function softOperationalText(value){
-  return previousSoftOperationalText(value)
-    .replace(/Barry Sweeney/ig,'Barry')
-    .replace(/Safety\s*&\s*Skipper Lead/ig,'Safety Lead')
-    .replace(/Lead on Land/ig,'Land Lead');
-}
+};
 
 const warning=document.querySelector('.warning');
 if(warning){
