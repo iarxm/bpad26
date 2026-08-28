@@ -1,6 +1,7 @@
 // Role-label refinement: keep volunteer language light while making lead roles easy to find.
 const controlRevision2 = window.control;
 const commsRevision2 = window.comms;
+const documentationRevision2 = window.documentation;
 const previousSoftOperationalText = window.softOperationalText;
 
 function leadStrip(){
@@ -59,6 +60,37 @@ window.comms = function(){
       if(note) note.textContent='Land contact for live location, waypoint progress and shore-side relays.';
     }
   });
+};
+
+window.documentation = function(){
+  documentationRevision2();
+  const root=document.querySelector('#documentation');
+  if(!root) return;
+
+  // Documentation is role-based and reusable; personal names belong only on the live Operations Dash / contacts surface.
+  root.querySelectorAll('.procedure').forEach(block=>{
+    const title=block.querySelector('strong')?.textContent.trim();
+    if(title==='Working coordination'){
+      block.innerHTML='<strong>Working coordination</strong><div>The Safety Lead coordinates on-water route and safety calls. The Land Lead receives live-location and waypoint progress updates and supports shore-side relays.</div>';
+    }
+    if(title==='Route shortening / extraction'){
+      block.innerHTML='<strong>Route shortening / extraction</strong><div>The Safety Lead coordinates the water/landing plan; the Land Lead supports shore-side relays and pickup coordination; all people and craft are positively accounted for at transfer.</div>';
+    }
+  });
+
+  root.querySelectorAll('.card').forEach(card=>{
+    const title=card.querySelector('.section-title')?.textContent.trim();
+    if(title==='Land reporting standard'){
+      const p=card.querySelector('p');
+      if(p) p.innerHTML='<strong>Land Lead</strong> receives the scheduled reporting-waypoint updates.';
+    }
+  });
+
+  // Safety net: no person-specific lead names should remain anywhere in Documentation.
+  root.innerHTML=root.innerHTML
+    .replace(/Barry Sweeney/gi,'Land Lead')
+    .replace(/\bBarry\b/gi,'Land Lead')
+    .replace(/\bCarlston\b/gi,'Safety Lead');
 };
 
 const warning=document.querySelector('.warning');
